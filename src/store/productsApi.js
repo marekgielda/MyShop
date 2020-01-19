@@ -1,0 +1,70 @@
+const DATA = [
+  {
+    id: 1,
+    name: 'Sony Play Station 4',
+    description: 'Poznaj bardziej smukłe, mniejsze PS4, które oferuje graczom niesamowite wrażenia z gier.',
+    photo: 'https://placeimg.com/140/180/people',
+    price: 1399,
+    in_stock: true,
+  },
+  {
+    id: 2,
+    name: 'Xbox One X',
+    description: 'Na Xbox One X gra się jeszcze lepiej. Dzięki większej o 40% mocy niż na jakiejkolwiek innej konsoli.',
+    photo: 'https://placeimg.com/140/180/nature',
+    price: 1500,
+    in_stock: true,
+  },
+  {
+    id: 3,
+    name: 'Macbook PRO 2018',
+    description: 'MacBook Pro - dotyk czyni cuda Jest niewiarygodnie smukły, lekki jak piórko, a do tego potężniejszy i szybszy niż kiedykolwiek',
+    photo: 'https://placeimg.com/140/180/dog',
+    price: 14900,
+    in_stock: true,
+  },
+  {
+    id: 4,
+    name: 'Macbook Air 2018',
+    description: '11-calowy MacBook Air działa bez ładowania baterii do 9 godzin, a 13-calowy - nawet 12.',
+    photo: 'https://placeimg.com/140/180/architecture',
+    price: 3600,
+    in_stock: true,
+  },
+  {
+    id: 5,
+    name: 'iPhone X',
+    description: 'iPhone X to telefon, który nie tyle posiada ekran, ile po prostu sam tym ekranem jest.',
+    photo: 'https://placeimg.com/140/180/tech',
+    price: 7299,
+    in_stock: false,
+  },
+  {
+    id: 6,
+    name: 'iPhone 6s',
+    description: 'Dzięki ułatwieniom dostępu użytkownicy niepełnosprawni mogą w pełni korzystać z możliwości iPhone’a 6s. Jeśli tylko zechcesz sięgnąć po to najbardziej osobiste z urządzeń, nic nie stanie Ci na przeszkodzie – ani wady narządu wzroku lub słuchu, ani trudności z nauką i czytaniem, ani niepełnosprawność ruchowa.',
+    photo: 'https://placeimg.com/140/180/tech',
+    price: 1600,
+    in_stock: true,
+  },
+  {
+    id: 7,
+    name: 'HTC VIVE VR',
+    description: 'Vive is an amazing virtual reality system. Let yourself be visually, physically and emotionally amazed by virtual worlds filled with inspiring characters, sights and sounds.',
+    photo: 'https://placeimg.com/140/180/tech',
+    price: 3800,
+    in_stock: true,
+  },
+  {
+    id: 8,
+    name: 'HTC VIVE VR 2',
+    description: 'Vive is an amazing virtual reality system. Let yourself be visually, physically and emotionally amazed by virtual worlds filled with inspiring characters, sights and sounds.',
+    photo: 'https://placeimg.com/140/180/tech',
+    price: 4600,
+    in_stock: false,
+  },
+]
+
+export default {
+  getProducts: (cb) => setTimeout(() => cb(DATA), 1000),
+}
