@@ -1,0 +1,5 @@
+export { Header } from './Header/Header'
+// export { Browser } from './Browser/Browser'
+export { ProductsList } from './ProductsList/ProductsList'
+export { Footer } from './Footer/Footer'
+// export { Cart } from './Cart/Cart'

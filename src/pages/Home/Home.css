@@ -49,11 +49,18 @@ body {
   margin-right: 20px;
   margin-bottom: 20px;
   border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
 }
 
 .search-input {
   width: 350px;
   padding: 6px;
+}
+
+.search-select {
+  width: 150px;
+  padding: 7px;
 }
 
 .product-box {
