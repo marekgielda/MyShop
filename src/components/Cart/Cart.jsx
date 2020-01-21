@@ -5,19 +5,17 @@ import {
 import { connect } from 'react-redux'
 import Snackbar from '@material-ui/core/Snackbar'
 
-import './Cart.css'
-import { removeFromCart } from '../../store/actions'
+import { removeFromCart } from '@store/actions'
 import CartItem from './CartItem'
 
 function Cart({ cartItems, onRemove }) {
   const [toastOpen, setToastOpen] = useState(false)
 
   const totalPrice = cartItems.length && cartItems
-    .map((item) => item.price)
-    .reduce((sum, num) => sum + num)
+    .reduce((sum, item) => sum + item.price, 0)
 
-  const handleProductRemove = (cartId) => {
-    onRemove(cartId)
+  const handleProductRemove = (productCartId) => {
+    onRemove(productCartId)
     setToastOpen(true)
   }
 
@@ -29,10 +27,10 @@ function Cart({ cartItems, onRemove }) {
           {cartItems.map(
             (item, index) => (
               <CartItem
-                key={item.cartId}
+                key={item.productCartId}
                 index={index}
                 data={item}
-                onRemove={(cartId) => handleProductRemove(cartId)}
+                onRemove={(productCartId) => handleProductRemove(productCartId)}
               />
             ),
           )}
@@ -55,27 +53,20 @@ function Cart({ cartItems, onRemove }) {
   )
 }
 
-Cart.defaultProps = {
-  cartItems: [],
-  onRemove: () => {},
-}
-
 Cart.propTypes = {
   cartItems: arrayOf(shape({
     id: number.isRequired,
     name: string.isRequired,
     price: number.isRequired,
-  })),
-  onRemove: func,
+  })).isRequired,
+  onRemove: func.isRequired,
 }
 
 const mapStateToProps = (state) => ({ cartItems: state.cartItems })
 
 const mapDispatchToProps = (dispatch) => ({
-  onRemove: (cartId) => {
-    // eslint-disable-next-line
-    console.debug('cartId', cartId)
-    dispatch(removeFromCart(cartId))
+  onRemove: (productCartId) => {
+    dispatch(removeFromCart(productCartId))
   },
 })
 

@@ -1,18 +1,15 @@
 import React, { useState } from 'react'
-import {
-  func, shape,
-} from 'prop-types'
+import { func, shape } from 'prop-types'
 import { connect } from 'react-redux'
 import Snackbar from '@material-ui/core/Snackbar'
 
-import { addToCart } from '../../store/actions'
-import { Product } from './Product'
+import { addToCart } from '@store/actions'
+import { ProductType } from './ProductType'
 
-const ProductItem = (props) => {
-  const { product, onAddToCart } = props
+const ProductItem = ({ product, onAddToCart }) => {
   const [toastOpen, setToastOpen] = useState(false)
 
-  const handleAddToCart = (productData) => {
+  const handleAddToCart = (productData) => () => {
     onAddToCart(productData)
     setToastOpen(true)
   }
@@ -33,7 +30,8 @@ const ProductItem = (props) => {
           <p>{product.description}</p>
           <button
             type="button"
-            onClick={() => handleAddToCart(product)}
+            onClick={handleAddToCart(product)}
+            disabled={product.in_stock < 1}
           >
           Dodaj do koszyka
           </button>
@@ -53,13 +51,9 @@ const ProductItem = (props) => {
   )
 }
 
-ProductItem.defaultProps = {
-  product: {},
-}
-
 ProductItem.propTypes = {
   onAddToCart: func.isRequired,
-  product: shape(Product),
+  product: shape(ProductType).isRequired,
 }
 
 const mapDispatchToProps = (dispatch) => ({

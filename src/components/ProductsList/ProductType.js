@@ -2,7 +2,7 @@ import {
   bool, number, string,
 } from 'prop-types'
 
-export const Product = {
+export const ProductType = {
   id: number.isRequired,
   name: string.isRequired,
   description: string.isRequired,

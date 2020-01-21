@@ -1,4 +1,4 @@
-import * as _ from 'underscore'
+import { sortBy } from 'underscore'
 import Cookies from 'js-cookie'
 
 import {
@@ -34,7 +34,7 @@ export const reducer = (state = getInitState(), action) => {
         price: action.item.price,
         description: action.item.description,
         in_stock: action.item.in_stock,
-        cartId: uuidv1(),
+        productCartId: uuidv1(),
       },
     ]
     Cookies.set('cartItems', JSON.stringify(newItems), { expires: 2 })
@@ -45,7 +45,7 @@ export const reducer = (state = getInitState(), action) => {
   }
   case REMOVE_FROM_CART: {
     const newItems = state.cartItems.filter(
-      (item) => item.cartId !== action.cartId,
+      (item) => item.productCartId !== action.productCartId,
     )
     Cookies.set('cartItems', JSON.stringify(newItems), { expires: 2 })
     return {
@@ -54,6 +54,9 @@ export const reducer = (state = getInitState(), action) => {
     }
   }
   case SEARCH_BY_PHRASE: {
+    if (action.phrase.length < 3) {
+      return state
+    }
     const re = new RegExp(action.phrase, 'i')
     const productsFiltered = state.products.filter(
       (item) => item.name.search(re, 'regex') !== -1,
@@ -64,7 +67,7 @@ export const reducer = (state = getInitState(), action) => {
     }
   }
   case SORT_PRODUCTS: {
-    let productsSorted = _.sortBy(
+    let productsSorted = sortBy(
       state.productsFiltered,
       (product) => {
         if (typeof product[action.sortingType] === 'string') {

@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import {
-  func,
-} from 'prop-types'
+import { func } from 'prop-types'
 import { connect } from 'react-redux'
 
-import {
-  sort,
-  searchPhrase,
-} from '../../store/actions'
-import './Browser.css'
+import { sort, searchPhrase } from '@store/actions'
 
-const Browser = ({ onSearchPhrase, onSort }) => {
+const Filters = ({ onSearchPhrase, onSort }) => {
   const [phrase, setPhrase] = useState('')
   const [sortingType, setSortingType] = useState('id')
   const [sortingDirection, setSortingDirection] = useState()
@@ -19,17 +13,17 @@ const Browser = ({ onSearchPhrase, onSort }) => {
     onSort(sortingType, sortingDirection)
   }, [sortingType, sortingDirection, onSort])
 
-  const onPhraseChange = (e) => {
+  const handlePhraseChange = () => (e) => {
     const newPhrase = e.target.value
     setPhrase(newPhrase)
     onSearchPhrase(newPhrase)
   }
 
-  const onSortingTypeSelectBlur = (e) => {
+  const handleSortingChange = () => (e) => {
     setSortingType(e.target.value)
   }
 
-  const onSortingDirectionSelectBlur = (e) => {
+  const handleSortDirectionChange = () => (e) => {
     setSortingDirection(e.target.value)
   }
 
@@ -39,13 +33,13 @@ const Browser = ({ onSearchPhrase, onSort }) => {
         className="search-input"
         placeholder="Szukaj..."
         value={phrase}
-        onChange={(e) => onPhraseChange(e)}
+        onChange={handlePhraseChange()}
       />
       <select
         className="search-select"
         defaultValue={sortingType}
-        onBlur={(e) => onSortingTypeSelectBlur(e)}
-        onChange={(e) => onSortingTypeSelectBlur(e)}
+        onBlur={handleSortingChange()}
+        onChange={handleSortingChange()}
       >
         <option value="id">Domyślnie</option>
         <option value="name">Nazwa</option>
@@ -54,25 +48,19 @@ const Browser = ({ onSearchPhrase, onSort }) => {
       <select
         className="search-select"
         defaultValue={sortingDirection}
-        onBlur={(e) => onSortingDirectionSelectBlur(e)}
-        onChange={(e) => onSortingDirectionSelectBlur(e)}
+        onBlur={handleSortDirectionChange()}
+        onChange={handleSortDirectionChange()}
       >
-        <option>Domyślnie</option>
-        <option value="ascending">Alfabetycznie rosnąco</option>
-        <option value="descending">Alfabetycznie malejąco</option>
+        <option value="ascending">Rosnąco</option>
+        <option value="descending">Malejąco</option>
       </select>
     </div>
   )
 }
 
-Browser.defaultProps = {
-  onSearchPhrase: () => {},
-  onSort: () => {},
-}
-
-Browser.propTypes = {
-  onSearchPhrase: func,
-  onSort: func,
+Filters.propTypes = {
+  onSearchPhrase: func.isRequired,
+  onSort: func.isRequired,
 }
 
 const mapDispatchToProps = (dispatch) => ({
@@ -84,4 +72,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 })
 
-export default connect(null, mapDispatchToProps)(Browser)
+export default connect(null, mapDispatchToProps)(Filters)

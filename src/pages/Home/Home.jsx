@@ -1,26 +1,23 @@
 import React from 'react'
 
+import Header from '@components/Header/Header'
+import Filters from '@components/Filters/Filters'
 import Cart from '@components/Cart/Cart'
-import Browser from '@components/Browser/Browser'
-import {
-  Header,
-  ProductsList,
-  Footer,
-} from '@components'
-import './Home.css'
+import ProductsList from '@components/ProductsList/ProductsList'
+import Footer from '@components/Footer/Footer'
 
-export default function Home() {
-  return (
-    <div id="root">
-      <div className="App">
-        <Header />
-        <Browser />
-        <div className="container">
-          <ProductsList />
-          <Cart />
-        </div>
-        <Footer />
+const Home = () => (
+  <div id="root">
+    <div className="App">
+      <Header />
+      <Filters />
+      <div className="container">
+        <ProductsList />
+        <Cart />
       </div>
+      <Footer />
     </div>
-  )
-}
+  </div>
+)
+
+export default Home

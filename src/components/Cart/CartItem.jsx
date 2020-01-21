@@ -1,17 +1,31 @@
 import React, { useState } from 'react'
 import {
-  string, number, shape, func,
+  string,
+  number,
+  shape,
+  func,
 } from 'prop-types'
 import Modal from '@material-ui/core/Modal'
 
 const CartItem = ({ data, index, onRemove }) => {
   const [modalOpen, setModalOpen] = useState(false)
 
+  const handleModalOpen = () => () => setModalOpen(true)
+
+  const handleProductRemove = (productCartId) => () => onRemove(productCartId)
+
   if (data) {
     return (
       <>
-        <li aria-hidden onClick={() => setModalOpen(true)}>
-          <button type="button" onClick={() => onRemove(data.cartId)}>
+        <li
+          className="noselect pointer"
+          aria-hidden
+          onClick={handleModalOpen()}
+        >
+          <button
+            type="button"
+            onClick={handleProductRemove(data.productCartId)}
+          >
           x
           </button>
           {`${index + 1} - ${data.name} - ${data.price} zł`}
@@ -37,21 +51,15 @@ const CartItem = ({ data, index, onRemove }) => {
   } return null
 }
 
-CartItem.defaultProps = {
-  data: {},
-  index: null,
-  onRemove: () => {},
-}
-
 CartItem.propTypes = {
   data: shape({
     id: number,
     name: string,
     price: number,
-    cartId: string,
-  }),
-  index: number,
-  onRemove: func,
+    productCartId: string,
+  }).isRequired,
+  index: number.isRequired,
+  onRemove: func.isRequired,
 }
 
 export default CartItem

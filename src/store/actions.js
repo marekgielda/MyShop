@@ -23,9 +23,9 @@ export const addToCart = (item) => ({
   item,
 })
 
-export const removeFromCart = (cartId) => ({
+export const removeFromCart = (productCartId) => ({
   type: REMOVE_FROM_CART,
-  cartId,
+  productCartId,
 })
 
 export const searchPhrase = (phrase) => ({

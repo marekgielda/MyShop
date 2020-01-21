@@ -2,13 +2,12 @@ import React from 'react'
 import { arrayOf, shape } from 'prop-types'
 import { connect } from 'react-redux'
 
-import './ProductList.css'
 import ProductItem from './ProductItem'
-import { Product } from './Product'
+import { ProductType } from './ProductType'
 
-const List = ({ products }) => (
+const ProductList = ({ products }) => (
   <section className="product-list">
-    {products.map(
+    {products && products.map(
       (product) => (
         <ProductItem
           key={product.id}
@@ -19,18 +18,12 @@ const List = ({ products }) => (
   </section>
 )
 
-List.defaultProps = {
-  products: [],
-}
-
-List.propTypes = {
-  products: arrayOf(shape(Product)),
+ProductList.propTypes = {
+  products: arrayOf(shape(ProductType)).isRequired,
 }
 
 const mapStateToProps = (state) => ({
   products: state.productsFiltered,
 })
 
-const mapDispatchToProps = () => ({})
-
-export const ProductsList = connect(mapStateToProps, mapDispatchToProps)(List)
+export default connect(mapStateToProps)(ProductList)
